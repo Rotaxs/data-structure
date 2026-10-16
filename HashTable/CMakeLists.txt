@@ -19,3 +19,24 @@ target_sources(hashTable PRIVATE
 target_include_directories(hashTable PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
+
+if (BUILD_TESTING)
+    add_executable(hashMap_tests)
+
+    target_sources(hashMap_tests PRIVATE
+        tests/test.c
+    )
+
+    target_link_libraries(hashMap_tests PRIVATE
+        hashTable
+    )
+
+    add_test(
+        NAME hashTable
+        COMMAND hashMap_tests
+    )
+
+    set_tests_properties(hashTable PROPERTIES
+        LABELS "hashTable"
+    )
+endif()
